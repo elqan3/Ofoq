@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
 
@@ -21,7 +22,6 @@ def search():
     departure = request.args.get('departure')
     lang = request.args.get('lang', 'en')
 
-    import requests
     url = f"http://api.aviationstack.com/v1/flights?access_key={API_KEY}&dep_iata={from_city}&arr_iata={to_city}"
     response = requests.get(url)
     data = response.json()
@@ -83,11 +83,3 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-@app.route('/booking/<int:flight_id>')
-def booking(flight_id):
-    lang = request.args.get('lang','en')
-    flight = flights[flight_id]
-    return render_template('booking.html', flight=flight, lang=lang)
-
