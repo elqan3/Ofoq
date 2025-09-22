@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking - Ofoq | أفق</title>
+
+<!-- أيقونات -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/*================= الأساسيات =================*/
+body {
+    background: url("{{ url_for('static', filename='images/bg_booking.jpg') }}") center/cover fixed no-repeat;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* الهيدر */
+header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    z-index: 999;
+}
+header .logo img{
+    height:50px;
+}
+header nav a, header nav button {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color .3s;
+}
+header nav a:hover, header nav button:hover {
+    color: #0077cc;
+}
+
+/* الحاوية الرئيسية */
+.booking-container {
+    max-width: 800px;
+    margin: 100px auto 60px;
+    padding: 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+.booking-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+/* معلومات الرحلة */
+.flight-info p {
+    margin: 8px 0;
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* النموذج */
+form {
+    margin-top: 25px;
+    display: grid;
+    gap: 15px;
+}
+input, select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+button.book-btn {
+    padding: 14px;
+    background: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+button.book-btn:hover {
+    background: #005fa3;
+}
+
+/* الفوتر */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    border-top: 2px solid #0077cc;
+}
+
+/*================= تجاوب الشاشات =================*/
+@media (max-width: 768px) {
+    .booking-container {
+        margin: 90px 15px 40px;
+        padding: 20px;
+    }
+    header nav a, header nav button {
+        margin-left: 12px;
+        font-size: 0.95rem;
+    }
+}
+@media (max-width: 480px) {
+    .booking-container h2 {
+        font-size: 1.6rem;
+    }
+    input, select, button.book-btn {
+        font-size: 0.95rem;
+    }
+    header .logo img {
+        height: 40px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- الهيدر -->
+<header>
+    <div class="logo">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Ofoq Logo">
+        </a>
+    </div>
+    <nav>
+        <a href="{{ url_for('index') }}" id="nav-home">Home</a>
+        <button id="lang-toggle">عربي</button>
+    </nav>
+</header>
+
+<!-- المحتوى -->
+<div class="booking-container" id="booking-box">
+    <h2 id="title"><i class="fas fa-ticket-alt"></i> Booking Details</h2>
+
+    <div class="flight-info">
+        <p id="airline"><i class="fas fa-plane"></i> Airline: {{ flight['airline'] }}</p>
+        <p id="from"><i class="fas fa-plane-departure"></i> From: {{ flight['from'] }}</p>
+        <p id="to"><i class="fas fa-plane-arrival"></i> To: {{ flight['to'] }}</p>
+        <p id="dep"><i class="fas fa-clock"></i> Departure: {{ flight['departure'] }}</p>
+        <p id="arr"><i class="fas fa-clock"></i> Arrival: {{ flight['arrival'] }}</p>
+        <p id="price"><i class="fas fa-dollar-sign"></i> Price: ${{ flight['price'] }}</p>
+    </div>
+
+    <!-- نموذج الحجز + الدفع -->
+    <form id="booking-form">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+
+        <select id="passengers" required>
+            <option value="">Number of Passengers</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+        </select>
+
+        <h3 id="pay-title">Payment Details (Test)</h3>
+        <input type="text" id="card-number" placeholder="Card Number (8 digits)" maxlength="8" required>
+        <input type="text" id="card-exp" placeholder="Expiry Date (MM/YY)" required>
+        <input type="text" id="card-cvv" placeholder="CVV (3 digits)" maxlength="3" required>
+
+        <button type="submit" class="book-btn" id="confirm">Pay & Book</button>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2025 Ofoq | أفق. All rights reserved.</p>
+</footer>
+
+<script>
+/*============== تبديل اللغة ==============*/
+const langBtn = document.getElementById('lang-toggle');
+let currentLang = 'en';
+langBtn.addEventListener('click', ()=>{
+    currentLang = (currentLang === 'en') ? 'ar' : 'en';
+    if(currentLang === 'ar'){
+        document.getElementById('title').innerHTML = '<i class="fas fa-ticket-alt"></i> تفاصيل الحجز';
+        document.getElementById('airline').innerHTML = '<i class="fas fa-plane"></i> شركة الطيران: {{ flight["airline"] }}';
+        document.getElementById('from').innerHTML = '<i class="fas fa-plane-departure"></i> من: {{ flight["from"] }}';
+        document.getElementById('to').innerHTML = '<i class="fas fa-plane-arrival"></i> إلى: {{ flight["to"] }}';
+        document.getElementById('dep').innerHTML = '<i class="fas fa-clock"></i> المغادرة: {{ flight["departure"] }}';
+        document.getElementById('arr').innerHTML = '<i class="fas fa-clock"></i> الوصول: {{ flight["arrival"] }}';
+        document.getElementById('price').innerHTML = '<i class="fas fa-dollar-sign"></i> السعر: ${{ flight["price"] }}';
+        document.getElementById('name').placeholder = 'الاسم الكامل';
+        document.getElementById('email').placeholder = 'البريد الإلكتروني';
+        document.getElementById('phone').placeholder = 'رقم الهاتف';
+        document.getElementById('passengers').options[0].text = 'عدد الركاب';
+        document.getElementById('card-number').placeholder = 'رقم البطاقة (8 أرقام)';
+        document.getElementById('card-exp').placeholder = 'تاريخ الانتهاء (MM/YY)';
+        document.getElementById('card-cvv').placeholder = 'CVV (3 أرقام)';
+        document.getElementById('pay-title').innerText = 'تفاصيل الدفع (تجريبي)';
+        document.getElementById('confirm').innerText = 'ادفع واحجز';
+        langBtn.innerText = 'English';
+        document.getElementById('nav-home').innerText = 'الرئيسية';
+        document.body.style.fontFamily = "'Tajawal', sans-serif";
+    } else {
+        location.reload();
+    }
+});
+
+/*============== نظام الدفع الوهمي ==============*/
+document.getElementById('booking-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const card = document.getElementById('card-number').value.trim();
+    const exp = document.getElementById('card-exp').value.trim();
+    const cvv = document.getElementById('card-cvv').value.trim();
+
+    if(card === '11111111' && exp === '11111111' && cvv === '111'){
+        alert(currentLang === 'ar'
+            ? 'تم الدفع بنجاح! سنتواصل معك عبر البريد لتسليم التذكرة.'
+            : 'Payment successful! We will contact you via email with your ticket.');
+        window.location.href = "{{ url_for('index') }}";
+    } else {
+        alert(currentLang === 'ar'
+            ? 'تفاصيل الدفع غير صحيحة. أدخل جميع القيم 1.'
+            : 'Invalid payment details. Enter all values as 1.');
+    }
+});
+</script>
+
+</body>
+</html>

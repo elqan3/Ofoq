@@ -1,0 +1,104 @@
+<!-- templates/about.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Qantri Booking</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* ====== Reset & Base ====== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #f5f7fa; color: #333; line-height: 1.6; }
+
+    /* ====== Header ====== */
+    header {
+        background-color: #1e3a8a;
+        padding: 1rem 2rem;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    header a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 1rem;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+    header a:hover { text-decoration: underline; }
+    .logo { font-size: 1.5rem; font-weight: bold; }
+
+    /* ====== Container ====== */
+    .container { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+
+    /* ====== Sections ====== */
+    section { background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+    h1, h2 { color: #1e3a8a; margin-bottom: 1rem; text-align: center; }
+    p { text-align: center; font-size: 1.1rem; margin-bottom: 1rem; }
+
+    /* ====== Icons Section ====== */
+    .icons { display: flex; justify-content: space-around; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .icon-box {
+        flex: 1 1 200px;
+        text-align: center;
+        padding: 1rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 10px;
+        background: #f0f4ff;
+    }
+    .icon-box:hover { transform: translateY(-10px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+    .icon-box i { font-size: 3rem; color: #1e3a8a; margin-bottom: 0.5rem; }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 768px) { .icons { flex-direction: column; align-items: center; } }
+</style>
+</head>
+<body>
+
+<!-- ====== Header ====== -->
+<header>
+    <div class="logo">Qantri Booking</div>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('login') }}">Login</a>
+    </nav>
+</header>
+
+<!-- ====== About Section ====== -->
+<div class="container">
+    <section>
+        <h1>عن مشروعنا</h1>
+        <p>مرحبًا بك في <strong>Qantri Booking</strong>، منصة تجريبية لحجز الرحلات. هدفنا تقديم تجربة مستخدم سلسة وسريعة، مع واجهة جذابة وسهلة الاستخدام، حتى تتمكن من استكشاف الرحلات بكل سهولة.</p>
+    </section>
+
+    <section>
+        <h2>أهداف ورسالتنا</h2>
+        <p>نطمح لتوفير تجربة حجز متكاملة وممتعة للمستخدم، مع التركيز على السرعة، السلاسة، والابتكار. رسالتنا: رحلة سهلة، ممتعة، وموثوقة.</p>
+
+        <div class="icons">
+            <div class="icon-box">
+                <i class="fas fa-rocket"></i>
+                <p>ابتكار</p>
+            </div>
+            <div class="icon-box">
+                <i class="fas fa-clock"></i>
+                <p>سهولة وسرعة</p>
+            </div>
+            <div class="icon-box">
+                <i class="fas fa-globe"></i>
+                <p>تجربة شاملة</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

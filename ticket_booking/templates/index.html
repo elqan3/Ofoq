@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofoq</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== Base ===== */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+    background: #f5f7fa; 
+    color: #333; 
+    line-height:1.6; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body[lang="ar"] { font-family: 'Cairo', sans-serif; } /* خط عربي احترافي */
+
+/* ===== Header ===== */
+header { background-color:#1e3a8a; padding:1rem 2rem; color:#fff; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; }
+header a { color:#fff; text-decoration:none; margin-left:1rem; font-weight:600; transition:0.3s; }
+header a:hover { text-decoration: underline; }
+.logo { font-size:1.5rem; font-weight:bold; }
+
+/* ===== Hero ===== */
+.hero { 
+    position:relative; 
+    height:70vh; 
+    background: url("{{ url_for('static', filename='images/travel-bg.jpg') }}") center/cover no-repeat; /* الخلفية المحلية */ 
+    display:flex; 
+    align-items:center; 
+    justify-content:center; 
+    text-align:center; 
+}
+
+.hero-overlay { position:absolute; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.5); }
+.hero-content { position:relative; color:#fff; z-index:2; }
+.hero-content h1 { font-size:3rem; margin-bottom:1rem; }
+.hero-content p { font-size:1.3rem; margin-bottom:2rem; }
+
+/* ===== Search Form ===== */
+.search-form { display:flex; flex-wrap: wrap; gap:0.5rem; justify-content:center; }
+.search-form input, .search-form button { padding:0.8rem 1rem; border-radius:6px; border:none; font-size:1rem; }
+.search-form button { background-color:#1e3a8a; color:#fff; cursor:pointer; transition:0.3s; }
+.search-form button:hover { background-color:#143070; }
+
+/* ===== Features ===== */
+.features { max-width:1200px; margin:3rem auto; display:flex; flex-wrap:wrap; justify-content:space-around; gap:2rem; padding:0 2rem; }
+.feature-box { background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); flex:1 1 250px; text-align:center; transition:0.3s; }
+.feature-box:hover { transform: translateY(-5px); }
+.feature-box i { font-size:2.5rem; color:#1e3a8a; margin-bottom:1rem; }
+.feature-box h3 { margin-bottom:1rem; color:#1e3a8a; }
+.feature-box p { font-size:1rem; color:#555; }
+
+/* ===== Booking Section ===== */
+.booking-section { max-width:800px; margin:3rem auto; background:#fff; padding:2rem; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); text-align:center; }
+.booking-section h2 { margin-bottom:1.5rem; color:#1e3a8a; }
+.booking-section form { display:flex; flex-wrap: wrap; gap:0.5rem; justify-content:center; }
+.booking-section input, .booking-section button { padding:0.8rem 1rem; border-radius:6px; border:1px solid #ccc; font-size:1rem; }
+.booking-section button { background-color:#1e3a8a; color:#fff; border:none; cursor:pointer; transition:0.3s; }
+.booking-section button:hover { background-color:#143070; }
+
+/* ===== Footer ===== */
+footer { background:#1e3a8a; color:#fff; text-align:center; padding:1rem; margin-top:3rem; }
+
+/* ===== Responsive ===== */
+@media (max-width:768px) {
+.hero-content h1 { font-size:2.2rem; }
+.hero-content p { font-size:1rem; }
+.features { flex-direction:column; align-items:center; }
+}
+</style>
+</head>
+<body lang="{{ lang }}">
+
+<header>
+<div class="logo">Ofoq</div>
+<nav>
+    <a href="{{ url_for('index', lang=lang) }}">{{ 'Home' if lang=='en' else 'الرئيسية' }}</a>
+    <a href="{{ url_for('about', lang=lang) }}">{{ 'About' if lang=='en' else 'نبذة' }}</a>
+    <a href="{{ url_for('contact', lang=lang) }}">{{ 'Contact' if lang=='en' else 'اتصل بنا' }}</a>
+    <a href="{{ url_for('login', lang=lang) }}">{{ 'Login' if lang=='en' else 'تسجيل الدخول' }}</a>
+    {% if lang=='en' %}
+    <a href="{{ url_for('index', lang='ar') }}">عربي</a>
+    {% else %}
+    <a href="{{ url_for('index', lang='en') }}">English</a>
+    {% endif %}
+</nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1>{{ 'Welcome to Ofoq' if lang=='en' else 'مرحبا بكم في أُفُق' }}</h1>
+<p>{{ 'Book your flights from anywhere, anytime!' if lang=='en' else 'احجز رحلاتك من أي مكان وفي أي وقت!' }}</p>
+</div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+<div class="feature-box">
+<i class="fas fa-plane-departure"></i>
+<h3>{{ 'Fast Booking' if lang=='en' else 'حجز سريع' }}</h3>
+<p>{{ 'Book flights in just a few clicks.' if lang=='en' else 'احجز رحلاتك ببضع نقرات فقط.' }}</p>
+</div>
+<div class="feature-box">
+<i class="fas fa-dollar-sign"></i>
+<h3>{{ 'Affordable Prices' if lang=='en' else 'أسعار مناسبة' }}</h3>
+<p>{{ 'Best prices guaranteed for all destinations.' if lang=='en' else 'أفضل الأسعار لجميع الوجهات.' }}</p>
+</div>
+<div class="feature-box">
+<i class="fas fa-headset"></i>
+<h3>{{ '24/7 Support' if lang=='en' else 'دعم 24/7' }}</h3>
+<p>{{ 'Our support team is ready to assist you anytime.' if lang=='en' else 'فريق الدعم جاهز لمساعدتك في أي وقت.' }}</p>
+</div>
+</section>
+
+<!-- Booking Section -->
+<section class="booking-section">
+<h2>{{ 'Search Flights' if lang=='en' else 'ابحث عن الرحلات' }}</h2>
+<form action="{{ url_for('search') }}" method="get">
+<input type="text" name="from" placeholder="{{ 'From (IATA code)' if lang=='en' else 'من (رمز IATA)' }}" required>
+<input type="text" name="to" placeholder="{{ 'To (IATA code)' if lang=='en' else 'إلى (رمز IATA)' }}" required>
+<input type="date" name="departure" required>
+<button type="submit">{{ 'Search Flights' if lang=='en' else 'ابحث' }}</button>
+</form>
+</section>
+
+<footer>
+<p>&copy; 2025 Qantri Booking. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
