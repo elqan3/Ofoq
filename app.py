@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-API_KEY = '99995c1aa51ec2acd62a9511c6c640ed'  # مفتاح الـ API
+API_KEY = '8a5b44cb8f4e48bc6277be81ceb24b20'  # مفتاح الـ API
 
 # تخزين نتائج البحث مؤقتًا
 cached_flights = []
@@ -83,3 +83,4 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
