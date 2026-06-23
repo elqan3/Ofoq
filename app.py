@@ -8,13 +8,13 @@ API_KEY = '8a5b44cb8f4e48bc6277be81ceb24b20'  # مفتاح الـ API
 # تخزين نتائج البحث مؤقتًا
 cached_flights = []
 
-# 🏠 الصفحة الرئيسية
+#  الصفحة الرئيسية
 @app.route('/')
 def index():
     lang = request.args.get('lang', 'en')  # اللغة
     return render_template('index.html', lang=lang)
 
-# 🔍 البحث عن الرحلات
+#  البحث عن الرحلات
 @app.route('/search', methods=['GET'])
 def search():
     from_city = request.args.get('from')
@@ -41,7 +41,7 @@ def search():
 
     return render_template('results.html', flights=cached_flights, lang=lang)
 
-# 🛫 صفحة تفاصيل الحجز
+#  صفحة تفاصيل الحجز
 @app.route('/booking/<int:flight_id>')
 def booking(flight_id):
     lang = request.args.get('lang', 'en')
@@ -51,7 +51,7 @@ def booking(flight_id):
     else:
         return "Flight not found", 404
 
-# 🔑 صفحة تسجيل الدخول
+#  صفحة تسجيل الدخول
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     lang = request.args.get('lang', 'en')
@@ -62,13 +62,13 @@ def login():
         return "Form submitted successfully!"
     return render_template('login.html', lang=lang)
 
-# 📖 صفحة About Us
+#  صفحة About Us
 @app.route('/about')
 def about():
     lang = request.args.get('lang', 'en')
     return render_template('about.html', lang=lang)
 
-# ✉️ صفحة Contact Us
+#  صفحة Contact Us
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     lang = request.args.get('lang', 'en')
